@@ -5,6 +5,7 @@ import jwt
 from passlib.context import CryptContext
 from fastapi.middleware.cors import CORSMiddleware
 from models import User, MissingPerson, FoundPerson
+import os
 from schemas import UserCreate, UserLogin, MissingPersonCreate , FoundPersonCreate
 
 pwd_context=CryptContext(schemes=["bcrypt"],deprecated="auto")
@@ -16,6 +17,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
 
 Base.metadata.create_all(bind=engine)
 
@@ -53,13 +56,7 @@ async def login_user(item:UserLogin, db : Session = Depends(get_db)):
     return create_token(db_user.id)
 
 
-
-
-
-
-
-
-
+#
 
 
 
