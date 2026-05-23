@@ -4,6 +4,7 @@ import Login from './components/Login'
 import Register from './components/Register'
 import Home from './components/Home'
 import Reports from './components/Reports'
+import About from './components/About'
 
 
 
@@ -18,7 +19,7 @@ import Reports from './components/Reports'
 const App = () => {
   return (
     <div>
-     <Reports/>
+     <About/>
     </div>
   )
 }
