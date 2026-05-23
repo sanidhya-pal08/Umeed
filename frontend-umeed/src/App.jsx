@@ -2,6 +2,7 @@ import React from 'react'
 import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom'
 import Login from './components/Login'
 import Register from './components/Register'
+import Home from './components/Home'
 
 
 
@@ -16,7 +17,7 @@ import Register from './components/Register'
 const App = () => {
   return (
     <div>
-      <Register/>
+      <Home/>
     </div>
   )
 }
