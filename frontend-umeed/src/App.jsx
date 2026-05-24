@@ -8,20 +8,20 @@ import About from './components/About'
 
 
 
-// const ProtectedRoute = ({ element }) => {
-//   const token = localStorage.getItem('token')
-//   return token ? element : <Navigate to="/" />
-// }
+const ProtectedRoute = ({ element }) => {
+  const token = localStorage.getItem('token')
+  return token ? element : <Navigate to="/" />
+}
 
-
+const router = createBrowserRouter([
+  {path:'/',element:<Login/>},
+  {path:'/register', element: <Register/>},
+  {path: '/dashboard', element: <ProtectedRoute element={<Home/>} />},
+])
 
 
 const App = () => {
-  return (
-    <div>
-     <About/>
-    </div>
-  )
+  return <RouterProvider router={router}/>
 }
 
 export default App

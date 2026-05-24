@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Login.css";
 import hero from '../assets/image.png'
+import { useNavigate } from "react-router-dom";
 
 
 const Login = () => {
+  const [email,setEmail] = useState("");
+  const [password,setPassword] = useState("");
+  const navigate=useNavigate();
+
+
+
+
   return (
     <div className="login-page">
       {/* Navbar */}
@@ -29,11 +37,7 @@ const Login = () => {
               <h3>Community Driven</h3>
               <p>Thousands of reports submitted by people across India.</p>
             </div>
-            <div className="feature-card">
-              <span className="feature-icon">🛡️</span>
-              <h3>Private & Secure</h3>
-              <p>Your data and identity are always protected.</p>
-            </div>
+            
           </div>
 
           {/* Hero Image */}
@@ -68,6 +72,8 @@ const Login = () => {
                 id="password"
                 placeholder="••••••••"
                 className="form-input"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
 
