@@ -9,7 +9,18 @@ const Login = () => {
   const [password,setPassword] = useState("");
   const navigate=useNavigate();
 
+async function handleLogin(){
+  const response = await fetch('http://127.0.0.1:8000',{
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({email_address: email, password: password})
+  });
 
+  if(!response.ok) return alert('Invalid credentials');
+  const token = await response.json();
+  localStorage.setItem('token',token);
+  navigate('/dashboard');
+}
 
 
   return (
@@ -59,6 +70,8 @@ const Login = () => {
                 id="email"
                 placeholder="name@example.com"
                 className="form-input"
+                value={email}
+                onChange={(e)=> setEmail(e.target.value)}
               />
             </div>
 
@@ -72,13 +85,13 @@ const Login = () => {
                 id="password"
                 placeholder="••••••••"
                 className="form-input"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
 
-            <button className="btn-primary">Log In</button>
-            <button className="btn-secondary">Create Account</button>
+            <button className="btn-primary" onClick={handleLogin}>Log In</button>
+            <button className="btn-secondary" onClick={() => navigate('/register')} style={{cursor: 'pointer'}}>Create Account</button>
 
             <div className="divider"></div>
 

@@ -1,8 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Register.css";
 import hero from '../assets/image.png'
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confimPassword, setConfirmPassword] = useState("");
+  const[firstName, setFirstName]=useState("");
+  const[lastName,setLastName]=useState("");
+  const navigate=useNavigate();
+
+    async function handleRegister() {
+    if (!email || !password) return alert('Enter all fields');
+    if(password !== confimPassword ) return alert('Passwords in the two fields does not match');
+    const res = await fetch('http://127.0.0.1:8000/users/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email_address: email, password: password , first_name: firstName, last_name: lastName})
+    });
+    if (res.ok) {
+      navigate('/');
+    } else {
+      const data = await res.json();
+      alert(data.detail);
+    }
+  }
   return (
     <div className="register-page">
       {/* Navbar */}
@@ -51,6 +74,8 @@ const Register = () => {
                   id="firstName"
                   placeholder="Rahul"
                   className="form-input"
+                  value={firstName}
+                  onChange={(e)=> setFirstName(e.target.value)}
                 />
               </div>
               <div className="form-group">
@@ -60,6 +85,8 @@ const Register = () => {
                   id="lastName"
                   placeholder="Sharma"
                   className="form-input"
+                  value={lastName}
+                  onChange={(e)=> setLastName(e.target.value)}
                 />
               </div>
             </div>
@@ -71,6 +98,8 @@ const Register = () => {
                 id="email"
                 placeholder="name@example.com"
                 className="form-input"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
 
@@ -81,6 +110,8 @@ const Register = () => {
                 id="password"
                 placeholder="••••••••"
                 className="form-input"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
 
@@ -91,6 +122,8 @@ const Register = () => {
                 id="confirmPassword"
                 placeholder="••••••••"
                 className="form-input"
+                value={confimPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
               />
             </div>
 
